@@ -375,6 +375,8 @@ button:disabled { cursor: default; }
 .contact-character { width: 160px; margin-left: auto; margin-top: -1.5rem; }
 .contact-bottom { position: relative; z-index: 2; margin-top: 1rem; }
 .cursor-shape { box-shadow: 0 0 35px #d4ee7530; }
+.custom-cursor[data-tone="dark"] .cursor-shape { background: var(--background); border-color: var(--background); box-shadow: none; }
+.custom-cursor[data-tone="dark"] .cursor-label { color: var(--accent); }
 .text-link svg, .round-link svg, .contact-email svg { transition: transform .3s ease; }
 .text-link:hover svg, .contact-email:hover svg { transform: translate(3px, -3px); }
 .round-link:hover svg { transform: translateY(4px); }

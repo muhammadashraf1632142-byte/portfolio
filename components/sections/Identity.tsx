@@ -3,7 +3,7 @@ import { ArrowIcon } from "@/components/layout/ArrowIcon";
 
 export function Identity() {
   return (
-    <section id="identity" className="identity-scene" aria-labelledby="identity-heading">
+    <section id="identity" className="identity-scene" aria-labelledby="identity-heading" data-cursor-tone="dark">
       <SceneMotion>
         <div className="identity-top page-gutter">
           <p className="eyebrow">A person behind the pixels</p>

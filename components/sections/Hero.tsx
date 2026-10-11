@@ -38,7 +38,7 @@ export function Hero() {
           <div className="hero-character"><Avatar pose="looking" /></div>
           <p className="eyebrow">Code. Craft. Interaction.</p>
           <a className="text-link cv-link" href={profile.cv} download data-cursor="link">
-            Download CV <span className="muted">(DOCX)</span> <ArrowIcon direction="down" />
+            Download CV <span className="muted">(PDF)</span> <ArrowIcon direction="down" />
           </a>
         </div>
       </div>

@@ -25,6 +25,7 @@ export default function MotionRuntime() {
     let currentX = 0;
     let currentY = 0;
     let mode = "normal";
+    let tone = "accent";
     let ready = false;
     const move = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
@@ -62,6 +63,13 @@ export default function MotionRuntime() {
       const lerp = 1 - Math.exp(-Math.min(deltaTime, 48) / 38);
       currentX += (pointer.x - currentX) * lerp;
       currentY += (pointer.y - currentY) * lerp;
+      // Hit-test the visible cursor so contrast also updates during scrolling.
+      const surface = document.elementFromPoint(currentX, currentY)?.closest("[data-cursor-tone]");
+      const nextTone = surface?.getAttribute("data-cursor-tone") ?? "accent";
+      if (nextTone !== tone) {
+        tone = nextTone;
+        cursor.dataset.tone = tone;
+      }
       const moving = performance.now() - pointer.timestamp < 100;
       const stretch = mode === "normal" && moving ? Math.min(pointer.speed / 180, 0.25) : 0;
       const angle = moving ? Math.atan2(pointer.velocityY, pointer.velocityX) * 180 / Math.PI : 0;

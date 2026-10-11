@@ -36,7 +36,7 @@ export const projects: readonly Project[] = [
     accent: "#b59aff",
     description:
       "A little less scrolling. A little more connection. A responsive, API-driven social frontend built around the people and moments that matter.",
-    liveUrl: "https://gather-nu-bay.vercel.app/profile",
+    liveUrl: "https://gather-nu-bay.vercel.app",
     technologies: ["React", "JavaScript", "CSS", "REST API"],
     highlights: [
       { title: "Connected experiences", description: "Posts, comments, profiles, notifications, and saved posts, connected through REST APIs." },
@@ -58,7 +58,7 @@ export const projects: readonly Project[] = [
     accent: "#92d9ad",
     description:
       "Everyday essentials. A considered shopping flow. A responsive storefront with product discovery, authentication, and API-driven cart interactions.",
-    liveUrl: "https://fresh-cart-rho-lovat.vercel.app/cart",
+    liveUrl: "https://fresh-cart-rho-lovat.vercel.app",
     technologies: ["Next.js", "React", "Tailwind CSS", "JavaScript", "REST API"],
     highlights: [
       { title: "From browsing to cart", description: "Product browsing, authentication, and cart flows connect the core shopping experience." },

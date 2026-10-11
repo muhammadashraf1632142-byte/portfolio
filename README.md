@@ -25,7 +25,7 @@ With the production server running, use a separate terminal:
 npm run test:e2e
 ```
 
-The 19 browser checks use installed Google Chrome through Playwright. They cover real fragment breakup and reconstruction for both projects with pixel comparisons, cursor-speed intensity, avatar articulation and blinking, individual-letter response, spring panels, skills tabs, process controls, playground forces, gallery navigation, accessibility, responsive layouts, reduced motion, WebGL failures, static navigation without JavaScript, and unknown project routes. Screenshots are written to the ignored test-results directory.
+The 20 browser checks use installed Google Chrome through Playwright. They cover real fragment breakup and reconstruction for both projects with pixel comparisons, cursor-speed intensity and contrast, avatar articulation and blinking, individual-letter response, spring panels, skills tabs, process controls, playground forces, gallery navigation, accessibility, responsive layouts, reduced motion, WebGL failures, static navigation without JavaScript, and unknown project routes. Screenshots are written to the ignored test-results directory.
 
 ## Page composition
 
@@ -40,7 +40,7 @@ Scenes use oversized typography, screenshot stacks, layered depth, clipped revea
 - components/motion: articulated SVG avatar, scene timelines, Lenis, cursor, magnetic links, spring panels, reactive letters, controlled image trails, and progressive route transitions
 - components/webgl: lazily loaded R3F renderer, Drei textures, one GPU mesh of independently moving fragments, and GLSL shaders
 - components/ui: keyboard, touch, and mouse-accessible screenshot gallery
-- data/profile.ts: identity, contact email, and the supplied DOCX CV
+- data/profile.ts: identity, contact email, and the supplied PDF CV
 - data/projects.ts: project content, real screenshots, and live URLs from the CV
 - data/capabilities.ts: interactive capability groups
 
@@ -62,4 +62,4 @@ No content or navigation depends on hover, WebGL, or motion. Desktop project lin
 
 Gather leads with its feed and uses people discovery and account screens as supporting layers. FreshCart leads with its storefront and uses product browsing and produce-home screens. Only original files in public/projects are used; unavailable profile, product-detail, and cart screenshots are not fabricated.
 
-Edit content and ordering in data/projects.ts. Live URLs are the original links from the CV. The download uses Muhammad_Ashraf_CV_Final.docx; no PDF was supplied.
+Edit content and ordering in data/projects.ts. Live URLs are the original links from the CV. The download uses the supplied Muhammad_Ashraf_CV_Frontend_Backend_2026.pdf; the contact address and download path are in data/profile.ts.

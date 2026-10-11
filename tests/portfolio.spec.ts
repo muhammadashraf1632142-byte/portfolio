@@ -36,10 +36,26 @@ test("desktop signatures, cinematic navigation, and real project routes", async 
   await page.locator("#project-freshcart .project-cta").click();
   await expect(page).toHaveURL(/\/projects\/freshcart$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("FreshCart.");
-  await expect(page.getByRole("link", { name: "Visit live site" })).toHaveAttribute("href", "https://fresh-cart-rho-lovat.vercel.app/cart");
+  await expect(page.getByRole("link", { name: "Visit live site" })).toHaveAttribute("href", "https://fresh-cart-rho-lovat.vercel.app");
   await page.waitForTimeout(900);
   await page.screenshot({ path: "test-results/desktop-detail.png", fullPage: true });
   expect(errors).toEqual([]);
+});
+
+test("cursor stays visible over the green section and restores its accent elsewhere", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-motion", "enabled");
+  const dot = page.locator(".cursor-shape");
+  await page.mouse.move(8, 150);
+  await expect(dot).toHaveCSS("background-color", "rgb(212, 238, 117)");
+  await page.locator("#identity").evaluate((element) => window.scrollTo(0, element.getBoundingClientRect().top + window.scrollY + 120));
+  await expect(dot).toHaveCSS("background-color", "rgb(16, 17, 15)");
+  await page.screenshot({ path: "test-results/cursor-green-section.png" });
+  await page.getByRole("link", { name: "Inside my world" }).hover();
+  await expect(dot).toHaveCSS("border-top-color", "rgb(16, 17, 15)");
+  await page.locator("#coding").evaluate((element) => window.scrollTo(0, element.getBoundingClientRect().top + window.scrollY + 120));
+  await page.mouse.move(8, 150);
+  await expect(dot).toHaveCSS("background-color", "rgb(212, 238, 117)");
 });
 
 test("gallery supports buttons, keyboard, and mouse drag", async ({ page }) => {
@@ -81,7 +97,7 @@ for (const width of [320, 390, 768]) {
     await page.screenshot({ path: `test-results/mobile-hero-${width}.png` });
     await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Contact" }).click();
     await expect(page).toHaveURL(/#contact$/);
-    await expect(page.getByRole("link", { name: "ma0083602@gmail.com" })).toBeInViewport();
+    await expect(page.getByRole("link", { name: "muhammadashraf1632142@gmail.com" })).toBeInViewport();
     for (const slug of ["gather", "freshcart"]) {
       await page.goto(`/projects/${slug}`);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
@@ -112,9 +128,16 @@ test("keyboard entry, CV download, and unknown routes work", async ({ page, requ
   await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("main")).toBeFocused();
-  const cv = await request.get("/Muhammad_Ashraf_CV_Final.docx");
+  const cvLink = page.getByRole("link", { name: "Download CV (PDF)" });
+  await expect(cvLink).toHaveAttribute("href", "/Muhammad_Ashraf_CV_Frontend_Backend_2026.pdf");
+  const cv = await request.get((await cvLink.getAttribute("href"))!);
   expect(cv.ok()).toBe(true);
-  expect((await cv.body()).length).toBeGreaterThan(1000);
+  expect(cv.headers()["content-type"]).toContain("application/pdf");
+  expect((await cv.body()).subarray(0, 5).toString()).toBe("%PDF-");
+  const downloading = page.waitForEvent("download");
+  await cvLink.click();
+  expect((await downloading).suggestedFilename()).toBe("Muhammad_Ashraf_CV_Frontend_Backend_2026.pdf");
+  await expect(page.getByRole("link", { name: "muhammadashraf1632142@gmail.com" })).toHaveAttribute("href", "mailto:muhammadashraf1632142@gmail.com");
   const response = await page.goto("/projects/unknown");
   expect(response?.status()).toBe(404);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Nothing here.");
